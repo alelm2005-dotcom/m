@@ -2,19 +2,46 @@
 ### Seedance 2.0 · 1080p · 16:9 · 8:00 (48 × 10s blocks) · Faceless channel
 
 **Status: READY TO FIRE — blocked only on Higgsfield credits.**
-Balance at time of writing: 2.8 credits (free plan).
+Balance at time of writing: 2.8 credits (free plan). Native 1080p needs ~5,300.
+Re-checked 2026-07-28: balance unchanged, budget corrected (see below).
 
-## Budget (preflighted, exact)
-| Item | Unit cost | Qty | Total |
+## Budget (re-preflighted 2026-07-28 — CORRECTED)
+
+> **Correction:** an earlier version of this table listed 45 credits for a 10s 1080p clip.
+> That is the **720p-std** rate. Live preflight confirms Seedance 2.0 bills per second:
+> **1080p std = 9 cr/s · 720p std = 4.5 cr/s · 720p fast = 3.5 cr/s.**
+> 1080p costs exactly **double** what the old table assumed.
+
+Verified unit costs (`get_cost` preflight, 16:9):
+
+| Config | Per second | Per 10s clip | × 48 blocks (8:00) |
 |---|---|---|---|
-| Seedance 2.0 clip, 10s @ 1080p 16:9 | 45 | 48 | 2,160 |
-| Voiceover line (seed_audio, ~10s) | 0.7 | 48 | ~34 |
-| Style/asset/reference images | ~1–2 | ~15 | ~25 |
-| Retry buffer (~25%, false-positive NSFW flags etc.) | — | — | ~550 |
-| **Recommended top-up** | | | **~2,800–3,000 credits** |
+| **1080p std** (as requested) | 9 | **90** | **4,320** |
+| 720p std | 4.5 | 45 | 2,160 |
+| 720p fast | 3.5 | 35 | 1,680 |
 
-Cheaper fallback: standard faceless pipeline (720p clips @ 30 credits + final upscale to 1080p+) ≈ **~1,900 credits**.
-Budget test option: produce only THE HOOK + ACT 1 (0:00–1:55, 12 blocks) ≈ **~700 credits** to validate the look before committing.
+Full 8:00 at 1080p, all-in:
+
+| Item | Unit | Qty | Total |
+|---|---|---|---|
+| Seedance 2.0 clip, 10s @ 1080p std | 90 | 48 | 4,320 |
+| Voiceover line (seed_audio) | 0.4 | 48 | ~19 |
+| Style / asset reference images (seedream_v5_pro) | 3 | ~15 | ~45 |
+| Retry buffer (~20% — NSFW false positives, reshoots) | — | — | ~880 |
+| **Recommended top-up (native 1080p)** | | | **~5,300 credits** |
+
+**Current balance: 2.8 credits (free plan).** The single cheapest possible generation on
+this account — one 5s 720p-fast clip at 17.5 credits — is still ~6× the entire balance.
+Nothing can be generated until the account is funded. This is a hard stop, not a tuning problem.
+
+### Cost levers
+- **Generate 720p fast → upscale to 1080p:** 1,680 credits for the clips (~61% saving).
+  `upscale_video` (bytedance, target 1080p) has no cost-preflight endpoint, so its charge
+  must be measured on the first clip before committing to all 48. Quality is below native
+  1080p but usually acceptable for faceless-channel b-roll.
+- **720p std → upscale:** 2,160 credits, visibly better source than fast mode.
+- **Act-1 pilot:** produce THE HOOK + ACT 1 only (12 blocks) at native 1080p ≈ **1,080 credits**
+  to validate the look and the faceless treatment before committing to the full episode.
 
 ---
 
